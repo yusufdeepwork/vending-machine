@@ -1,5 +1,5 @@
 function App() {
-  return <>Vendoring Machine</>
+  return <h1 className="text-3xl font-bold underline">Vending Machine!</h1>
 }
 
 export default App
