@@ -1,5 +1,5 @@
 {
-  "name": "vendor-machine",
+  "name": "vending-machine",
   "private": true,
   "version": "0.0.0",
   "type": "module",
