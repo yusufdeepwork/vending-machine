@@ -20,7 +20,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "paths": {
+      "@/*": ["./src/*"],
+      "@app-components/*": ["./src/components/*"],
+      "@app-containers/*": ["./src/containers/*"],
+      "@app-shared/*": ["./src/shared/*"],
+      "@app-redux/*": ["./src/redux/*"]
+    }
   },
   "include": ["src"]
 }
