@@ -25,6 +25,7 @@ export const Texts = {
   SECOND: 'Saniye',
   COLDNESS: 'Soğukluk',
   ENERGY_LEVEL: 'Enerji Seviyesi',
+  ENTER_VALID_MONEY: 'Lütfen geçerli para girin',
 }
 
 export const Products = [

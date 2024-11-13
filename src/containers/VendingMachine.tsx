@@ -43,7 +43,7 @@ const VendingMachine: React.FC = () => {
 
   const handleSelectProduct = (name: string, price: number) => {
     dispatch(selectProduct({ name, price }))
-    dispatch(startTimer()) // Ürün seçildiğinde timer'ı başlat
+    dispatch(startTimer())
   }
 
   const handleTemperatureChange = (level: number) => {
@@ -98,7 +98,7 @@ const VendingMachine: React.FC = () => {
             {Texts.REFUND_BUTTON}
           </Button>
         </div>
-        <div className='w-60'>
+        <div className="w-60">
           <Timer
             isActive={isTimerActive}
             duration={300000}

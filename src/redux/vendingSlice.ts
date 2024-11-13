@@ -1,3 +1,4 @@
+import { MoneyValues, Texts } from '@/shared/constants'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export type VendingStatus =
@@ -15,7 +16,7 @@ interface VendingState {
   status: VendingStatus
   temperatureLevel: number
   energyConsumption: number
-  isTimerActive: boolean // Timer'ın aktif olup olmadığını tutan state
+  isTimerActive: boolean
 }
 
 const initialState: VendingState = {
@@ -25,7 +26,7 @@ const initialState: VendingState = {
   status: 'waitingSelectingProduct',
   temperatureLevel: 1,
   energyConsumption: 2,
-  isTimerActive: false, // Başlangıçta timer aktif değil
+  isTimerActive: false,
 }
 
 export const vendingSlice = createSlice({
@@ -33,6 +34,8 @@ export const vendingSlice = createSlice({
   initialState,
   reducers: {
     addMoney: (state, action: PayloadAction<number>) => {
+      if (!MoneyValues.includes(action.payload)) alert(Texts.ENTER_VALID_MONEY)
+
       state.totalMoney += action.payload
       if (
         state.selectedProduct &&
@@ -91,10 +94,10 @@ export const vendingSlice = createSlice({
       state.temperatureLevel = action.payload
     },
     startTimer: (state) => {
-      state.isTimerActive = true // Timer aktif edildi
+      state.isTimerActive = true
     },
     stopTimer: (state) => {
-      state.isTimerActive = false // Timer durduruldu
+      state.isTimerActive = false
     },
   },
 })
