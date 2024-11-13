@@ -9,12 +9,12 @@ export type VendingStatus =
   | 'insufficientFunds'
   | 'refundedMoney'
 
-interface ProductProps {
+export interface ProductProps {
   name: string
   price: number
 }
 
-interface VendingState {
+export interface VendingState {
   totalMoney: number
   selectedProduct: ProductProps | null
   refundedMoney: number
