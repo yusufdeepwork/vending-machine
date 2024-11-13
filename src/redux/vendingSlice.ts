@@ -9,14 +9,20 @@ export type VendingStatus =
   | 'insufficientFunds'
   | 'refundedMoney'
 
+interface ProductProps {
+  name: string
+  price: number
+}
+
 interface VendingState {
   totalMoney: number
-  selectedProduct: { name: string; price: number } | null
+  selectedProduct: ProductProps | null
   refundedMoney: number
   status: VendingStatus
   temperatureLevel: number
   energyConsumption: number
   isTimerActive: boolean
+  collectedMoney: number
 }
 
 const initialState: VendingState = {
@@ -27,6 +33,7 @@ const initialState: VendingState = {
   temperatureLevel: 1,
   energyConsumption: 2,
   isTimerActive: false,
+  collectedMoney: 0,
 }
 
 export const vendingSlice = createSlice({
@@ -63,6 +70,8 @@ export const vendingSlice = createSlice({
         state.totalMoney -= state.selectedProduct.price
         state.refundedMoney = state.totalMoney
         state.status = 'completedOperation'
+        state.collectedMoney =
+          state.selectedProduct.price + state.collectedMoney
         state.selectedProduct = null
       } else {
         state.status = 'insufficientFunds'
@@ -99,6 +108,24 @@ export const vendingSlice = createSlice({
     stopTimer: (state) => {
       state.isTimerActive = false
     },
+    resetMachine: (state) => {
+      state.selectedProduct = null
+      state.totalMoney = 0
+      state.refundedMoney = 0
+      state.status = 'waitingSelectingProduct'
+      state.isTimerActive = false
+    },
+    collectMoney: (state) => {
+      const password = prompt(Texts.ENTER_ADMIN_PASSWORD)
+      const correctPassword = 'admin123' // Temporary solution for just showing that we need authorization
+
+      if (password === correctPassword) {
+        alert(`${Texts.COLLECTED_MONEY} ${state.collectedMoney} `)
+        state.collectedMoney = 0
+      } else {
+        alert(Texts.INCORRECT_PASSWORD)
+      }
+    },
   },
 })
 
@@ -110,6 +137,8 @@ export const {
   setTemperatureLevel,
   startTimer,
   stopTimer,
+  resetMachine,
+  collectMoney,
 } = vendingSlice.actions
 
 export default vendingSlice.reducer

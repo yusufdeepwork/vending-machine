@@ -8,6 +8,8 @@ import {
   setTemperatureLevel,
   startTimer,
   stopTimer,
+  resetMachine,
+  collectMoney,
 } from '@app-redux/vendingSlice'
 import Display from '@app-components/Display'
 import Product from '@app-components/Product'
@@ -65,6 +67,14 @@ const VendingMachine: React.FC = () => {
     dispatch(refund())
   }
 
+  const handleResetMachine = () => {
+    dispatch(resetMachine())
+  }
+
+  const handleCollectMoney = () => {
+    dispatch(collectMoney())
+  }
+
   return (
     <div className="flex gap-2 flex-col ">
       <div className="bg-gray-900 text-white p-6 rounded-lg gap-4 shadow-lg flex flex-col items-center max-w-sm w-full">
@@ -98,12 +108,21 @@ const VendingMachine: React.FC = () => {
             {Texts.REFUND_BUTTON}
           </Button>
         </div>
+
         <div className="w-60">
           <Timer
             isActive={isTimerActive}
             duration={300000}
             onFinish={handleTimerFinish}
           />
+        </div>
+        <div className="flex gap-2 w-full  justify-center">
+          <Button color="gray-400" onClick={handleResetMachine}>
+            {Texts.RESET_BUTTON}
+          </Button>
+          <Button color="gray-400" onClick={handleCollectMoney}>
+            {Texts.COLLECT_MONEY_BUTTON}
+          </Button>
         </div>
       </div>
 

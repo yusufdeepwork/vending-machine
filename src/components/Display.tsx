@@ -58,7 +58,7 @@ const Display = ({ isMaximumEnergyExceed }: DisplayProps) => {
   }
 
   return (
-    <div className="flex w-full max-w-80 bg-gray-800 text-white p-4 h-20 items-center justify-center flex-col rounded-lg text-center">
+    <div className="flex w-full max-w-80 bg-gray-800 text-white p-4 md:h-20 h-auto min-h-20 items-center justify-center flex-col rounded-lg text-center">
       {!isMaximumEnergyExceed && (
         <p>
           {selectedProduct

@@ -26,6 +26,11 @@ export const Texts = {
   COLDNESS: 'Soğukluk',
   ENERGY_LEVEL: 'Enerji Seviyesi',
   ENTER_VALID_MONEY: 'Lütfen geçerli para girin',
+  RESET_BUTTON: 'Sıfırla',
+  COLLECT_MONEY_BUTTON: 'Parayı Topla',
+  INCORRECT_PASSWORD: 'Yanlış şifre. Yetkisiz erişim engellendi.',
+  COLLECTED_MONEY: 'Toplanan tutar:',
+  ENTER_ADMIN_PASSWORD: 'Lütfen para toplamak için şifreyi giriniz:',
 }
 
 export const Products = [
