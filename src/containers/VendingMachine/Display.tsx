@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
-import { formatMoney } from '../shared/utils'
-import { Texts } from '../shared/constants'
+import { RootState } from '../../redux/store'
+import { formatMoney } from '../../shared/utils'
+import { Texts } from '../../shared/constants'
 
 interface DisplayProps {
   isMaximumEnergyExceed: boolean

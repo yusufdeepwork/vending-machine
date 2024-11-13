@@ -11,7 +11,7 @@ import {
   resetMachine,
   collectMoney,
 } from '@app-redux/vendingSlice'
-import Display from '@/containers/Display'
+import Display from '@/containers/VendingMachine/Display'
 import Product from '@app-components/Product'
 import MoneyButton from '@app-components/MoneyButton'
 import Button from '@app-components/Button'
