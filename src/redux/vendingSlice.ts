@@ -23,7 +23,7 @@ const initialState: VendingState = {
   refundedMoney: 0,
   status: 'waitingSelectingProduct',
   temperatureLevel: 1,
-  energyConsumption: 1,
+  energyConsumption: 2,
 }
 
 export const vendingSlice = createSlice({

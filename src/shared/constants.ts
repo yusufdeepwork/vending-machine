@@ -20,7 +20,7 @@ export const Texts = {
   SELECT_NEW_PRODUCT: 'Yeniden başlamak için ürün seçin lütfen.',
   OPERATION_COMPLETED: 'İşlem tamamlandı.',
   MAXIMUM_ENERGY_CONSUMPTION_ALERT:
-    'Maksimumum enerji sınırına ulaşıldı.\n İşlem yapabilmek için enerji tüketimini azaltın.',
+    'Maksimumum enerji kullanımı aşıldı.\n İşlem yapabilmek için lütfen enerji tüketimini azaltın.',
 }
 
 export const Products = [

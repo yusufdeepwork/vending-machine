@@ -31,7 +31,7 @@ const VendingMachine: React.FC = () => {
     useSelector((state: RootState) => state.vending)
 
   const isMaximumEnergyExceed =
-    energyConsumption === EnergyLevels[EnergyLevels.length - 1]
+    energyConsumption >= EnergyLevels[EnergyLevels.length - 1]
 
   const isBuyDisabled =
     Number(selectedProduct?.price) > totalMoney ||
