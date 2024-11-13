@@ -21,6 +21,10 @@ export const Texts = {
   OPERATION_COMPLETED: 'İşlem tamamlandı.',
   MAXIMUM_ENERGY_CONSUMPTION_ALERT:
     'Maksimumum enerji kullanımı aşıldı.\n İşlem yapabilmek için lütfen enerji tüketimini azaltın.',
+  MINUTE: 'Dakika',
+  SECOND: 'Saniye',
+  COLDNESS: 'Soğukluk',
+  ENERGY_LEVEL: 'Enerji Seviyesi',
 }
 
 export const Products = [

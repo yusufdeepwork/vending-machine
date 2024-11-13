@@ -1,4 +1,4 @@
-import { EnergyLevels } from '@/shared/constants'
+import { EnergyLevels, Texts } from '@/shared/constants'
 
 interface EnergyIndicatorProps {
   energyLevel: number
@@ -8,7 +8,7 @@ const EnergyIndicator = ({ energyLevel }: EnergyIndicatorProps) => {
   return (
     <div className="flex items-center space-x-4">
       <div className="flex flex-col items-center">
-        Enerji Seviyesi
+        {Texts.ENERGY_LEVEL}
         <div className="flex space-x-1 mt-2 pointer-events-none">
           {EnergyLevels.map((level) => (
             <div

@@ -15,6 +15,7 @@ interface VendingState {
   status: VendingStatus
   temperatureLevel: number
   energyConsumption: number
+  isTimerActive: boolean // Timer'ın aktif olup olmadığını tutan state
 }
 
 const initialState: VendingState = {
@@ -24,6 +25,7 @@ const initialState: VendingState = {
   status: 'waitingSelectingProduct',
   temperatureLevel: 1,
   energyConsumption: 2,
+  isTimerActive: false, // Başlangıçta timer aktif değil
 }
 
 export const vendingSlice = createSlice({
@@ -62,6 +64,8 @@ export const vendingSlice = createSlice({
       } else {
         state.status = 'insufficientFunds'
       }
+
+      state.isTimerActive = false
     },
     refund: (state) => {
       if (state.totalMoney > 0) {
@@ -72,6 +76,7 @@ export const vendingSlice = createSlice({
       state.refundedMoney = state.totalMoney
       state.totalMoney = 0
       state.selectedProduct = null
+      state.isTimerActive = false
     },
     setTemperatureLevel: (state, action: PayloadAction<number>) => {
       if (action.payload > state.temperatureLevel) {
@@ -85,6 +90,12 @@ export const vendingSlice = createSlice({
       }
       state.temperatureLevel = action.payload
     },
+    startTimer: (state) => {
+      state.isTimerActive = true // Timer aktif edildi
+    },
+    stopTimer: (state) => {
+      state.isTimerActive = false // Timer durduruldu
+    },
   },
 })
 
@@ -94,6 +105,8 @@ export const {
   buyProduct,
   refund,
   setTemperatureLevel,
+  startTimer,
+  stopTimer,
 } = vendingSlice.actions
 
 export default vendingSlice.reducer

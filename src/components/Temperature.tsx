@@ -1,4 +1,4 @@
-import { TemperatureLevels } from '@/shared/constants'
+import { TemperatureLevels, Texts } from '@/shared/constants'
 
 interface TemperatureProps {
   onTemperatureChange: (level: number) => void
@@ -16,7 +16,7 @@ const TemperatureControl = ({
   return (
     <div className="flex items-center space-x-4">
       <div className="flex flex-col items-center">
-        Soğukluk
+        {Texts.COLDNESS}
         <div className="flex space-x-1 mt-2">
           {TemperatureLevels.map((lvl) => (
             <div

@@ -6,6 +6,8 @@ import {
   selectProduct,
   addMoney,
   setTemperatureLevel,
+  startTimer,
+  stopTimer,
 } from '@app-redux/vendingSlice'
 import Display from '@app-components/Display'
 import Product from '@app-components/Product'
@@ -15,20 +17,18 @@ import { Products, MoneyValues, Texts, EnergyLevels } from '@/shared/constants'
 import { RootState } from '@/redux/store'
 import TemperatureControl from '@/components/Temperature'
 import EnergyIndicator from '@/components/EnergyIndicator'
+import Timer from '@app-components/Timer'
 
 const VendingMachine: React.FC = () => {
   const dispatch = useDispatch()
 
-  const handleSelectProduct = (name: string, price: number) => {
-    dispatch(selectProduct({ name, price }))
-  }
-
-  const handleTemperatureChange = (level: number) => {
-    dispatch(setTemperatureLevel(level))
-  }
-
-  const { selectedProduct, totalMoney, temperatureLevel, energyConsumption } =
-    useSelector((state: RootState) => state.vending)
+  const {
+    selectedProduct,
+    totalMoney,
+    temperatureLevel,
+    energyConsumption,
+    isTimerActive,
+  } = useSelector((state: RootState) => state.vending)
 
   const isMaximumEnergyExceed =
     energyConsumption >= EnergyLevels[EnergyLevels.length - 1]
@@ -40,6 +40,30 @@ const VendingMachine: React.FC = () => {
 
   const isRefundDisabled =
     !selectedProduct || totalMoney === 0 || isMaximumEnergyExceed
+
+  const handleSelectProduct = (name: string, price: number) => {
+    dispatch(selectProduct({ name, price }))
+    dispatch(startTimer()) // Ürün seçildiğinde timer'ı başlat
+  }
+
+  const handleTemperatureChange = (level: number) => {
+    dispatch(setTemperatureLevel(level))
+  }
+
+  const handleTimerFinish = () => {
+    if (selectedProduct) {
+      dispatch(refund())
+    }
+    dispatch(stopTimer())
+  }
+
+  const handleBuy = () => {
+    dispatch(buyProduct())
+  }
+
+  const handleRefund = () => {
+    dispatch(refund())
+  }
 
   return (
     <div className="flex gap-2 flex-col ">
@@ -56,7 +80,6 @@ const VendingMachine: React.FC = () => {
             isMaximumEnergyExceed ? 'opacity-50 pointer-events-none' : ''
           }`}
         >
-          {' '}
           {Products.map((product) => (
             <Product
               key={product.name}
@@ -68,18 +91,19 @@ const VendingMachine: React.FC = () => {
 
         <Display isMaximumEnergyExceed={isMaximumEnergyExceed} />
         <div className="flex gap-4">
-          <Button
-            onClick={() => dispatch(buyProduct())}
-            disabled={isBuyDisabled}
-          >
+          <Button onClick={handleBuy} disabled={isBuyDisabled}>
             {Texts.BUY_BUTTON}
           </Button>
-          <Button
-            onClick={() => dispatch(refund())}
-            disabled={isRefundDisabled}
-          >
+          <Button onClick={handleRefund} disabled={isRefundDisabled}>
             {Texts.REFUND_BUTTON}
           </Button>
+        </div>
+        <div className='w-60'>
+          <Timer
+            isActive={isTimerActive}
+            duration={300000}
+            onFinish={handleTimerFinish}
+          />
         </div>
       </div>
 
