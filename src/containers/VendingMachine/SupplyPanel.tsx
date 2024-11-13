@@ -17,10 +17,10 @@ const SupplyPanel = ({
         isDisabled ? 'opacity-50 pointer-events-none' : ''
       }`}
     >
-      <Button color="gray-400" onClick={handleResetMachine}>
+      <Button bgColor="bg-gray-500" onClick={handleResetMachine}>
         {Texts.RESET_BUTTON}
       </Button>
-      <Button color="gray-400" onClick={handleCollectMoney}>
+      <Button bgColor="bg-gray-500" onClick={handleCollectMoney}>
         {Texts.COLLECT_MONEY_BUTTON}
       </Button>
     </div>
