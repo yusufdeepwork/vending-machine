@@ -13,6 +13,8 @@ interface VendingState {
   selectedProduct: { name: string; price: number } | null
   refundedMoney: number
   status: VendingStatus
+  temperatureLevel: number
+  energyConsumption: number
 }
 
 const initialState: VendingState = {
@@ -20,6 +22,8 @@ const initialState: VendingState = {
   selectedProduct: null,
   refundedMoney: 0,
   status: 'waitingSelectingProduct',
+  temperatureLevel: 1,
+  energyConsumption: 1,
 }
 
 export const vendingSlice = createSlice({
@@ -69,10 +73,27 @@ export const vendingSlice = createSlice({
       state.totalMoney = 0
       state.selectedProduct = null
     },
+    setTemperatureLevel: (state, action: PayloadAction<number>) => {
+      if (action.payload > state.temperatureLevel) {
+        state.energyConsumption =
+          state.energyConsumption +
+          (action.payload - state.temperatureLevel) * 2
+      } else {
+        state.energyConsumption =
+          state.energyConsumption -
+          (state.temperatureLevel - action.payload) * 2
+      }
+      state.temperatureLevel = action.payload
+    },
   },
 })
 
-export const { addMoney, selectProduct, buyProduct, refund } =
-  vendingSlice.actions
+export const {
+  addMoney,
+  selectProduct,
+  buyProduct,
+  refund,
+  setTemperatureLevel,
+} = vendingSlice.actions
 
 export default vendingSlice.reducer

@@ -19,6 +19,8 @@ export const Texts = {
   REFUND_BUTTON: 'Vazgeç',
   SELECT_NEW_PRODUCT: 'Yeniden başlamak için ürün seçin lütfen.',
   OPERATION_COMPLETED: 'İşlem tamamlandı.',
+  MAXIMUM_ENERGY_CONSUMPTION_ALERT:
+    'Maksimumum enerji sınırına ulaşıldı.\n İşlem yapabilmek için enerji tüketimini azaltın.',
 }
 
 export const Products = [
@@ -40,3 +42,7 @@ export const Products = [
 ]
 
 export const MoneyValues = [1, 5, 10, 20]
+
+export const TemperatureLevels = [1, 2, 3]
+
+export const EnergyLevels = [1, 2, 3, 4, 5]

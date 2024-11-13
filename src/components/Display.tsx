@@ -1,15 +1,25 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { formatMoney } from '../shared/utils'
 import { Texts } from '../shared/constants'
 
-const Display: React.FC = () => {
+interface DisplayProps {
+  isMaximumEnergyExceed: boolean
+}
+
+const Display = ({ isMaximumEnergyExceed }: DisplayProps) => {
   const { refundedMoney, selectedProduct, status, totalMoney } = useSelector(
     (state: RootState) => state.vending
   )
 
   const renderText = () => {
+    if (isMaximumEnergyExceed) {
+      return (
+        <p className="text-red-500 text-center break-words whitespace-pre-wrap">
+          {Texts.MAXIMUM_ENERGY_CONSUMPTION_ALERT}
+        </p>
+      )
+    }
     if (status === 'refundedMoney') {
       return (
         <p className="text-green-500">{Texts.REFUND_MESSAGE(refundedMoney)}</p>
@@ -48,12 +58,14 @@ const Display: React.FC = () => {
   }
 
   return (
-    <div className="flex bg-gray-800 text-white p-4 h-20 items-center justify-center flex-col rounded-lg text-center">
-      <p>
-        {selectedProduct
-          ? Texts.SELECTED_PRODUCT_PROMPT(selectedProduct.name)
-          : status !== 'completedOperation' && Texts.SELECT_PRODUCT_PROMPT}
-      </p>
+    <div className="flex w-full max-w-80 bg-gray-800 text-white p-4 h-20 items-center justify-center flex-col rounded-lg text-center">
+      {!isMaximumEnergyExceed && (
+        <p>
+          {selectedProduct
+            ? Texts.SELECTED_PRODUCT_PROMPT(selectedProduct.name)
+            : status !== 'completedOperation' && Texts.SELECT_PRODUCT_PROMPT}
+        </p>
+      )}
       {renderText()}
     </div>
   )
