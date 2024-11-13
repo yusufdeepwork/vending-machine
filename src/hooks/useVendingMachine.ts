@@ -52,6 +52,8 @@ const useVendingMachine = () => {
     dispatch(setTemperatureLevel(level))
   }
 
+  const isMoneyEnteringDisabled = !selectedProduct || isMaximumEnergyExceed
+
   const handleTimerFinish = () => {
     if (selectedProduct) {
       dispatch(refund())
@@ -96,6 +98,7 @@ const useVendingMachine = () => {
     isTimerActive,
     handleAddMoney,
     energyConsumption,
+    isMoneyEnteringDisabled,
   }
 }
 

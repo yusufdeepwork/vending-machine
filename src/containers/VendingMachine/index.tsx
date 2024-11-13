@@ -1,17 +1,16 @@
 import React from 'react'
-import { MoneyValues, Products, Texts } from '@/shared/constants'
+import { Products, Texts } from '@/shared/constants'
 import Display from '@/containers/VendingMachine/Display'
 import Product from '@app-components/Product'
-import MoneyButton from '@app-components/MoneyButton'
 import Button from '@app-components/Button'
 import TemperatureControl from '@/components/Temperature'
 import EnergyIndicator from '@/components/EnergyIndicator'
 import Timer from '@app-components/Timer'
 import useVendingMachine from '@/hooks/useVendingMachine'
+import MoneyList from './MoneyList'
 
 const VendingMachine: React.FC = () => {
   const {
-    selectedProduct,
     temperatureLevel,
     isMaximumEnergyExceed,
     isBuyDisabled,
@@ -26,6 +25,7 @@ const VendingMachine: React.FC = () => {
     handleAddMoney,
     isTimerActive,
     energyConsumption,
+    isMoneyEnteringDisabled,
   } = useVendingMachine()
 
   return (
@@ -79,21 +79,10 @@ const VendingMachine: React.FC = () => {
         </div>
       </div>
 
-      <div
-        className={`flex gap-4 flex-wrap flex-row items-center justify-center ${
-          !selectedProduct || isMaximumEnergyExceed
-            ? 'opacity-50 pointer-events-none'
-            : ''
-        }`}
-      >
-        {MoneyValues.map((amount) => (
-          <MoneyButton
-            key={amount}
-            amount={amount}
-            onClick={() => handleAddMoney(amount)}
-          />
-        ))}
-      </div>
+      <MoneyList
+        isMoneyEnteringDisabled={isMoneyEnteringDisabled}
+        handleAddMoney={handleAddMoney}
+      />
     </div>
   )
 }
