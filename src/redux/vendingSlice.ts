@@ -120,7 +120,7 @@ export const vendingSlice = createSlice({
       const correctPassword = 'admin123' // Temporary solution for just showing that we need authorization
 
       if (password === correctPassword) {
-        alert(`${Texts.COLLECTED_MONEY} ${state.collectedMoney} `)
+        alert(`${Texts.COLLECTED_MONEY} ${state.collectedMoney} 🪙`)
         state.collectedMoney = 0
       } else {
         alert(Texts.INCORRECT_PASSWORD)

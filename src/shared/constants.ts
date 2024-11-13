@@ -31,6 +31,7 @@ export const Texts = {
   INCORRECT_PASSWORD: 'Yanlış şifre. Yetkisiz erişim engellendi.',
   COLLECTED_MONEY: 'Toplanan tutar:',
   ENTER_ADMIN_PASSWORD: 'Lütfen para toplamak için şifreyi giriniz:',
+  REMAINING_TIME: 'İşlem için kalan süre',
 }
 
 export const Products = [

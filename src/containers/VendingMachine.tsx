@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   buyProduct,
@@ -11,7 +11,7 @@ import {
   resetMachine,
   collectMoney,
 } from '@app-redux/vendingSlice'
-import Display from '@app-components/Display'
+import Display from '@/containers/Display'
 import Product from '@app-components/Product'
 import MoneyButton from '@app-components/MoneyButton'
 import Button from '@app-components/Button'
@@ -32,16 +32,23 @@ const VendingMachine: React.FC = () => {
     isTimerActive,
   } = useSelector((state: RootState) => state.vending)
 
-  const isMaximumEnergyExceed =
-    energyConsumption >= EnergyLevels[EnergyLevels.length - 1]
+  const isMaximumEnergyExceed = useMemo(
+    () => energyConsumption >= EnergyLevels[EnergyLevels.length - 1],
+    [energyConsumption]
+  )
 
-  const isBuyDisabled =
-    Number(selectedProduct?.price) > totalMoney ||
-    !selectedProduct ||
-    isMaximumEnergyExceed
+  const isBuyDisabled = useMemo(
+    () =>
+      (selectedProduct?.price as number) > totalMoney ||
+      !selectedProduct ||
+      isMaximumEnergyExceed,
+    [selectedProduct, totalMoney, isMaximumEnergyExceed]
+  )
 
-  const isRefundDisabled =
-    !selectedProduct || totalMoney === 0 || isMaximumEnergyExceed
+  const isRefundDisabled = useMemo(
+    () => !selectedProduct || totalMoney === 0 || isMaximumEnergyExceed,
+    [selectedProduct, totalMoney, isMaximumEnergyExceed]
+  )
 
   const handleSelectProduct = (name: string, price: number) => {
     dispatch(selectProduct({ name, price }))
